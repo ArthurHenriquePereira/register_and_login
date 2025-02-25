@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Cadastro</title>
+    <link rel="stylesheet" href="style_cadastro.css">
+</head>
+<body>
+    <div class="register-container">
+        <h2>Cadastro</h2>
+        <form id="registerForm">
+            <input type="text" name="username" placeholder="Usuário" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <a href="http://localhost:8066/Testes/index.html">Já tenho uma conta</a>
+    </div>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const body = Object.fromEntries(formData.entries());
+            const response = await fetch('http://localhost:3006/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+            
+            const data = await response.json();
+            if (response.ok) {
+                if(data.failed == true){
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                    window.location.href = 'http://localhost:8066/Testes/menu.html';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

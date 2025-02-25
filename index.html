@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+    <link rel="stylesheet" href="style_login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="text" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+        <a href="http://localhost:8066/Testes/cadastro.html">Não possui uma conta? cadastre-se</a>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const email = event.target.email.value;
+            const password = event.target.password.value;
+
+            try {
+                const response = await fetch('http://localhost:3006/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    if(data.failed == true){
+                        alert(data.message);
+                    } else {
+                        alert(data.message);
+                        window.location.href = 'http://localhost:8066/Testes/menu.html';
+                    }
+                }
+            } catch (error) {
+                alert('Ocorreu um erro ao realizar o login!');
+            }
+        });
+    </script>
+</body>
+</html>
