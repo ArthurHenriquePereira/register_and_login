@@ -15,7 +15,7 @@
             <input type="password" name="password" placeholder="Senha" required>
             <button type="submit">Cadastrar</button>
         </form>
-        <a href="http://localhost:8066/Testes/index.html">Já tenho uma conta</a>
+        <a href="http://localhost:8066/register_and_login/index.html">Já tenho uma conta</a>
     </div>
     <script>
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
@@ -35,7 +35,7 @@
                     alert(data.message);
                 } else {
                     alert(data.message);
-                    window.location.href = 'http://localhost:8066/Testes/menu.html';
+                    window.location.href = 'http://localhost:8066/register_and_login/menu.html';
                 }
             }
         });
